@@ -1,0 +1,345 @@
+ncsim> 
+ncsim> database -open waves -into waves.shm -default
+Created default SHM database waves
+ncsim> probe -create -shm day18_tb.A day18_tb.B day18_tb.CIN day18_tb.and_Y day1\
+8_tb.baud_count day18_tb.baud_enable day18_tb.baud_tick day18_tb.bit_clear day18\
+_tb.bit_count day18_tb.bit_enable day18_tb.clk day18_tb.data_in day18_tb.data_lo\
+ad day18_tb.data_reg day18_tb.fa_carry day18_tb.fa_sum day18_tb.fail_count day18\
+_tb.fsm_next day18_tb.fsm_state day18_tb.ha_carry day18_tb.ha_sum day18_tb.i day\
+18_tb.inc_A day18_tb.inc_Y day18_tb.last_bit day18_tb.nand_Y day18_tb.nor_Y day1\
+8_tb.not_Y day18_tb.or_Y day18_tb.pass_count day18_tb.r_busy day18_tb.r_done day\
+18_tb.r_tx day18_tb.reset day18_tb.s_baud_count day18_tb.s_baud_tick day18_tb.s_\
+bit_count day18_tb.s_busy day18_tb.s_data_reg day18_tb.s_done day18_tb.s_state d\
+ay18_tb.s_tx day18_tb.start day18_tb.timeout day18_tb.tx_logic day18_tb.xor_Y
+Created probe 1
+ncsim> run
+
+================================================
+DAY 18 UART TRANSMITTER VERIFICATION
+================================================
+
+TEST 1 - BASIC GATES
+PASS |           NOT 00 | Expected=1 Actual=1
+PASS |           AND 00 | Expected=0 Actual=0
+PASS |            OR 00 | Expected=0 Actual=0
+PASS |           XOR 00 | Expected=0 Actual=0
+PASS |          NAND 00 | Expected=1 Actual=1
+PASS |           NOR 00 | Expected=1 Actual=1
+PASS |           NOT 01 | Expected=1 Actual=1
+PASS |           AND 01 | Expected=0 Actual=0
+PASS |            OR 01 | Expected=1 Actual=1
+PASS |           XOR 01 | Expected=1 Actual=1
+PASS |          NAND 01 | Expected=1 Actual=1
+PASS |           NOR 01 | Expected=0 Actual=0
+PASS |           NOT 10 | Expected=0 Actual=0
+PASS |           AND 10 | Expected=0 Actual=0
+PASS |            OR 10 | Expected=1 Actual=1
+PASS |           XOR 10 | Expected=1 Actual=1
+PASS |          NAND 10 | Expected=1 Actual=1
+PASS |           NOR 10 | Expected=0 Actual=0
+PASS |           NOT 11 | Expected=0 Actual=0
+PASS |           AND 11 | Expected=1 Actual=1
+PASS |            OR 11 | Expected=1 Actual=1
+PASS |           XOR 11 | Expected=0 Actual=0
+PASS |          NAND 11 | Expected=0 Actual=0
+PASS |           NOR 11 | Expected=0 Actual=0
+
+TEST 2 - HALF ADDER
+PASS |        HA 00 SUM | Expected=0 Actual=0
+PASS |      HA 00 CARRY | Expected=0 Actual=0
+PASS |        HA 01 SUM | Expected=1 Actual=1
+PASS |      HA 01 CARRY | Expected=0 Actual=0
+PASS |        HA 10 SUM | Expected=1 Actual=1
+PASS |      HA 10 CARRY | Expected=0 Actual=0
+PASS |        HA 11 SUM | Expected=0 Actual=0
+PASS |      HA 11 CARRY | Expected=1 Actual=1
+
+TEST 3 - FULL ADDER
+PASS |           FA SUM | Expected=0 Actual=0
+PASS |         FA CARRY | Expected=0 Actual=0
+PASS |           FA SUM | Expected=1 Actual=1
+PASS |         FA CARRY | Expected=0 Actual=0
+PASS |           FA SUM | Expected=1 Actual=1
+PASS |         FA CARRY | Expected=0 Actual=0
+PASS |           FA SUM | Expected=0 Actual=0
+PASS |         FA CARRY | Expected=1 Actual=1
+PASS |           FA SUM | Expected=1 Actual=1
+PASS |         FA CARRY | Expected=0 Actual=0
+PASS |           FA SUM | Expected=0 Actual=0
+PASS |         FA CARRY | Expected=1 Actual=1
+PASS |           FA SUM | Expected=0 Actual=0
+PASS |         FA CARRY | Expected=1 Actual=1
+PASS |           FA SUM | Expected=1 Actual=1
+PASS |         FA CARRY | Expected=1 Actual=1
+
+TEST 4 - 4-BIT INCREMENTER
+PASS |      INCREMENTER | Expected=1 Actual=1
+PASS |      INCREMENTER | Expected=2 Actual=2
+PASS |      INCREMENTER | Expected=3 Actual=3
+PASS |      INCREMENTER | Expected=4 Actual=4
+PASS |      INCREMENTER | Expected=5 Actual=5
+PASS |      INCREMENTER | Expected=6 Actual=6
+PASS |      INCREMENTER | Expected=7 Actual=7
+PASS |      INCREMENTER | Expected=8 Actual=8
+PASS |      INCREMENTER | Expected=9 Actual=9
+PASS |      INCREMENTER | Expected=a Actual=a
+PASS |      INCREMENTER | Expected=b Actual=b
+PASS |      INCREMENTER | Expected=c Actual=c
+PASS |      INCREMENTER | Expected=d Actual=d
+PASS |      INCREMENTER | Expected=e Actual=e
+PASS |      INCREMENTER | Expected=f Actual=f
+PASS |      INCREMENTER | Expected=0 Actual=0
+
+TEST 5 - UART RESET
+PASS |  STRUCT TX RESET | Expected=1 Actual=1
+PASS | TRUCT BUSY RESET | Expected=0 Actual=0
+PASS | TRUCT DONE RESET | Expected=0 Actual=0
+
+TEST 6 - DATA REGISTER
+PASS | TA REGISTER LOAD | Expected=a5 Actual=a5
+
+TEST 7 - BAUD COUNTER
+PASS |     BAUD COUNT 1 | Expected=1 Actual=1
+PASS |     BAUD COUNT 2 | Expected=2 Actual=2
+PASS |     BAUD COUNT 3 | Expected=3 Actual=3
+PASS |        BAUD TICK | Expected=1 Actual=1
+PASS |  BAUD COUNT WRAP | Expected=0 Actual=0
+PASS |  BAUD TICK CLEAR | Expected=0 Actual=0
+
+TEST 8 - BIT COUNTER
+PASS | IT COUNTER CLEAR | Expected=0 Actual=0
+PASS |   LAST BIT CLEAR | Expected=0 Actual=0
+PASS |      BIT COUNT 1 | Expected=1 Actual=1
+PASS |      BIT COUNT 2 | Expected=2 Actual=2
+PASS |      BIT COUNT 3 | Expected=3 Actual=3
+PASS |      BIT COUNT 4 | Expected=4 Actual=4
+PASS |      BIT COUNT 5 | Expected=5 Actual=5
+PASS |      BIT COUNT 6 | Expected=6 Actual=6
+PASS |      BIT COUNT 7 | Expected=7 Actual=7
+PASS |         LAST BIT | Expected=1 Actual=1
+PASS | UNTER SATURATION | Expected=7 Actual=7
+
+TEST 9 - TX OUTPUT LOGIC
+PASS |          TX IDLE | Expected=1 Actual=1
+PASS |         TX START | Expected=0 Actual=0
+PASS |     TX DATA BIT0 | Expected=1 Actual=1
+PASS |          TX STOP | Expected=1 Actual=1
+
+TEST 10 - FSM RESET
+PASS |  FSM RESET STATE | Expected=0 Actual=0
+
+TEST 11 - COMPLETE UART FRAME
+PASS | BUSY AFTER START | Expected=1 Actual=1
+PASS |     TX START BIT | Expected=0 Actual=0
+PASS |             DONE | Expected=1 Actual=1
+FAIL |         RTL DONE | Expected=1 Actual=0
+PASS |       DONE CLEAR | Expected=0 Actual=0
+
+TEST 12 - COMPLETE UART FRAME BIT VERIFICATION
+PASS | BUSY AFTER START | Expected=1 Actual=1
+PASS |  FRAME START BIT | Expected=0 Actual=0
+PASS |  FRAME START BIT | Expected=0 Actual=0
+PASS |  FRAME START BIT | Expected=0 Actual=0
+FAIL |  FRAME START BIT | Expected=0 Actual=1
+PASS | FRAME DATA BIT 0 | Expected=1 Actual=1
+PASS | FRAME DATA BIT 0 | Expected=1 Actual=1
+PASS | FRAME DATA BIT 0 | Expected=1 Actual=1
+FAIL | FRAME DATA BIT 0 | Expected=1 Actual=0
+PASS | FRAME DATA BIT 1 | Expected=0 Actual=0
+PASS | FRAME DATA BIT 1 | Expected=0 Actual=0
+PASS | FRAME DATA BIT 1 | Expected=0 Actual=0
+FAIL | FRAME DATA BIT 1 | Expected=0 Actual=1
+PASS | FRAME DATA BIT 2 | Expected=1 Actual=1
+PASS | FRAME DATA BIT 2 | Expected=1 Actual=1
+PASS | FRAME DATA BIT 2 | Expected=1 Actual=1
+FAIL | FRAME DATA BIT 2 | Expected=1 Actual=0
+PASS | FRAME DATA BIT 3 | Expected=0 Actual=0
+PASS | FRAME DATA BIT 3 | Expected=0 Actual=0
+PASS | FRAME DATA BIT 3 | Expected=0 Actual=0
+PASS | FRAME DATA BIT 3 | Expected=0 Actual=0
+PASS | FRAME DATA BIT 4 | Expected=0 Actual=0
+PASS | FRAME DATA BIT 4 | Expected=0 Actual=0
+PASS | FRAME DATA BIT 4 | Expected=0 Actual=0
+FAIL | FRAME DATA BIT 4 | Expected=0 Actual=1
+PASS | FRAME DATA BIT 5 | Expected=1 Actual=1
+PASS | FRAME DATA BIT 5 | Expected=1 Actual=1
+PASS | FRAME DATA BIT 5 | Expected=1 Actual=1
+FAIL | FRAME DATA BIT 5 | Expected=1 Actual=0
+PASS | FRAME DATA BIT 6 | Expected=0 Actual=0
+PASS | FRAME DATA BIT 6 | Expected=0 Actual=0
+PASS | FRAME DATA BIT 6 | Expected=0 Actual=0
+FAIL | FRAME DATA BIT 6 | Expected=0 Actual=1
+PASS | FRAME DATA BIT 7 | Expected=1 Actual=1
+PASS | FRAME DATA BIT 7 | Expected=1 Actual=1
+PASS | FRAME DATA BIT 7 | Expected=1 Actual=1
+PASS | FRAME DATA BIT 7 | Expected=1 Actual=1
+PASS |   FRAME STOP BIT | Expected=1 Actual=1
+PASS |   FRAME STOP BIT | Expected=1 Actual=1
+PASS |   FRAME STOP BIT | Expected=1 Actual=1
+PASS |   FRAME STOP BIT | Expected=1 Actual=1
+PASS | BUSY AFTER FRAME | Expected=0 Actual=0
+FAIL | DONE AFTER FRAME | Expected=1 Actual=0
+PASS | DONE AFTER FRAME | Expected=1 Actual=1
+
+TEST 13 - STRUCTURAL VS RTL
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+FAIL | CTURAL VS RTL TX | Expected=0 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+FAIL | CTURAL VS RTL TX | Expected=1 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=0 Actual=0
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+FAIL | CTURAL VS RTL TX | Expected=0 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=1 Actual=1
+FAIL | URAL VS RTL DONE | Expected=0 Actual=1
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=0 Actual=0
+FAIL | URAL VS RTL DONE | Expected=1 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=0 Actual=0
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=0 Actual=0
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=0 Actual=0
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=0 Actual=0
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=0 Actual=0
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=0 Actual=0
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=0 Actual=0
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=0 Actual=0
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+PASS | CTURAL VS RTL TX | Expected=1 Actual=1
+PASS | URAL VS RTL BUSY | Expected=0 Actual=0
+PASS | URAL VS RTL DONE | Expected=0 Actual=0
+
+================================================
+VERIFICATION COMPLETE
+PASS COUNT = 275
+FAIL COUNT = 14
+================================================
+RESULT: TEST FAILED
+Simulation complete via $finish(1) at time 1565 NS + 0
+./day18_tb.v:1380         $finish;
+ncsim> 
+
